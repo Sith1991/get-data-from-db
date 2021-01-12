@@ -5,6 +5,7 @@ import './random-planet.css';
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
+// 1st commit in master branch
 
 export default class RandomPlanet extends Component {
 
