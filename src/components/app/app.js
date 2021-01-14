@@ -7,8 +7,13 @@ import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page";
 
 import './app.css';
+import ItemList from "../item-list";
+import PersonDetails from "../person-details";
+import SwapiService from "../../services/swapi-service";
 
 export default class App extends Component {
+
+    SwapiService = new SwapiService();
 
     state = {
         hasError: false,
@@ -20,7 +25,6 @@ export default class App extends Component {
             hasError: true
         })
     }
-
 
     toggleRandomPlanet = () => {
         this.setState((state) => {
@@ -54,8 +58,29 @@ export default class App extends Component {
                 </div>
 
                 <PeoplePage />
-                <PeoplePage />
-                <PeoplePage />
+
+                <div className="row mb2">
+                    <div className="col-md-6">
+                        <ItemList onItemSelected={this.onPersonSelected}
+                                  getData={this.SwapiService.getAllPlanets}/>
+                    </div>
+                    <div className="col-md-6">
+                        <PersonDetails personId={this.state.selectedPerson}/>
+                        <ErrorButton />
+                    </div>
+                </div>
+
+                <div className="row mb2">
+                    <div className="col-md-6">
+                        <ItemList onItemSelected={this.onPersonSelected}
+                                  getData={this.SwapiService.getAllStarships}/>
+                    </div>
+                    <div className="col-md-6">
+                        <PersonDetails personId={this.state.selectedPerson}/>
+                        <ErrorButton />
+                    </div>
+                </div>
+
             </div>
         );
     }
