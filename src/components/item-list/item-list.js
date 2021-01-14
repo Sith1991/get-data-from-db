@@ -18,14 +18,15 @@ export default class ItemList extends Component {
             })
     }
 
-    renderItems = (arr) => {
-        return arr.map(
-            ({id, name}) => {
+    renderPerson = (arr) => {
+        return arr.map((item) => {
+                const label = this.props.renderItem(item);
+                const {id} = item;
                 return (
                     <li className="list-group-item"
                         key={id}
                         onClick={() => this.props.onItemSelected(id)}>
-                        {name}
+                        {label}
                     </li>
                 )}
         )}
@@ -38,7 +39,7 @@ export default class ItemList extends Component {
             return <Spinner/>
         }
 
-        const items = this.renderItems(itemList);
+        const items = this.renderPerson(itemList);
 
         return (
             <ul className="item-list list-group">
