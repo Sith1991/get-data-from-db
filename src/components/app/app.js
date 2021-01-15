@@ -10,6 +10,7 @@ import './app.css';
 import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
+import Row from "../Row";
 
 export default class App extends Component {
 
@@ -34,11 +35,26 @@ export default class App extends Component {
         });
     };
 
+
     render() {
 
         if (this.state.hasError) {
-            return <ErrorIndicator />;
+            return <ErrorIndicator/>;
         }
+
+        const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.SwapiService;
+
+        const personDetails = (
+            <ItemDetails itemId={11}
+                         getData={getPerson}
+            getImageUrl={getPersonImage}/>
+        );
+
+        const starshipDetails = (
+            <ItemDetails itemId={5}
+                         getData={getStarship}
+            getImageUrl={getStarshipImage}/>
+        );
 
         const planet = this.state.showRandomPlanet ?
             <RandomPlanet/> :
@@ -48,16 +64,16 @@ export default class App extends Component {
             <div>
                 <Header/>
                 {planet}
-                <div className="row mb2 button-row" >
+                <div className="row mb2 button-row">
                     <button
                         className="toggle-planet btn btn-warning btn-lg"
                         onClick={this.toggleRandomPlanet}>
                         Toggle Random Planet
                     </button>
-                    <ErrorButton />
+                    <ErrorButton/>
                 </div>
 
-                <PeoplePage />
+                <Row left={personDetails} right={starshipDetails}/>
 
             </div>
         );

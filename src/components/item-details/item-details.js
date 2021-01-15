@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
-
-import './item-details.css';
-import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 import ErrorButton from "../error-button";
+
+import './item-details.css';
 
 export default class ItemDetails extends Component {
 
     state = {
         item: null,
         loading: true,
+        image: null
     }
 
-    SwapiService = new SwapiService();
-
     updateItems = () => {
-        const {itemId} = this.props;
+        const {itemId, getData, getImageUrl} = this.props;
         if (!itemId) {
             return;
         }
@@ -24,11 +22,12 @@ export default class ItemDetails extends Component {
           loading: true
         })
 
-        this.SwapiService.getPerson(itemId)
+        getData(itemId)
             .then((item) => {
                 this.setState({
                     item,
-                    loading: false
+                    loading: false,
+                    image: getImageUrl(item.id)
                 })
             })
     }
@@ -45,7 +44,7 @@ export default class ItemDetails extends Component {
 
     render() {
 
-        const {item, loading} = this.state;
+        const {item, loading, image} = this.state;
 
         if (!item) {
             return <span>Select a person for item list</span>
@@ -56,7 +55,7 @@ export default class ItemDetails extends Component {
             return (
                 <React.Fragment>
                     <img className="person-image"
-                         src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}/>
+                         src={image}/>
 
                     <div className="card-body">
                         <h4>{name}</h4>
