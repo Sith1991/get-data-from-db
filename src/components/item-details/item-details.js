@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
 
-import './person-details.css';
+import './item-details.css';
 import SwapiService from "../../services/swapi-service";
 import Spinner from "../spinner";
 import ErrorButton from "../error-button";
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
     state = {
-        person: null,
+        item: null,
         loading: true,
     }
 
     SwapiService = new SwapiService();
 
-    onUpdatePerson = () => {
-        const {personId} = this.props;
-        if (!personId) {
+    updateItems = () => {
+        const {itemId} = this.props;
+        if (!itemId) {
             return;
         }
 
@@ -24,35 +24,35 @@ export default class PersonDetails extends Component {
           loading: true
         })
 
-        this.SwapiService.getPerson(personId)
-            .then((person) => {
+        this.SwapiService.getPerson(itemId)
+            .then((item) => {
                 this.setState({
-                    person,
+                    item,
                     loading: false
                 })
             })
     }
 
     componentDidMount() {
-        this.onUpdatePerson();
+        this.updateItems();
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.personId !== prevProps.personId) {
-            this.onUpdatePerson()
+        if (this.props.itemId !== prevProps.itemId) {
+            this.updateItems()
         }
     }
 
     render() {
 
-        const {person, loading} = this.state;
+        const {item, loading} = this.state;
 
-        if (!person) {
+        if (!item) {
             return <span>Select a person for item list</span>
         }
 
-        const PersonView = ({person}) => {
-            const {id, name, gender, birthYear, eyeColor} = person;
+        const PersonView = ({item}) => {
+            const {id, name, gender, birthYear, eyeColor} = item;
             return (
                 <React.Fragment>
                     <img className="person-image"
@@ -81,7 +81,7 @@ export default class PersonDetails extends Component {
         }
 
       const spinner = loading ? <Spinner/> : null;
-      const content = !loading ? <PersonView person={person}/> : null;
+      const content = !loading ? <PersonView item={item}/> : null;
 
         return (
             <div className="person-details card">
