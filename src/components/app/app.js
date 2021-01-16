@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorButton from "../error-button";
@@ -9,8 +8,9 @@ import './app.css';
 
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-service";
-import Row from "../Row";
+
 import {Record} from "../item-details/item-details";
+import ItemList from "../item-list";
 
 export default class App extends Component {
 
@@ -42,7 +42,7 @@ export default class App extends Component {
             return <ErrorIndicator/>;
         }
 
-        const {getPerson, getStarship, getPersonImage, getStarshipImage} = this.SwapiService;
+        const {getPerson, getStarship, getPersonImage, getStarshipImage, getAllPeople, getAllPlanets} = this.SwapiService;
 
         const personDetails = (
             <ItemDetails itemId={11}
@@ -84,7 +84,10 @@ export default class App extends Component {
                     <ErrorButton/>
                 </div>
 
-                <Row left={personDetails} right={starshipDetails}/>
+                {/*<Row left={personDetails} right={starshipDetails}/>*/}
+
+                <ItemList getData={getAllPeople} onItemSelected={ () => {}}>{(i) => (`${i.name} (${i.birthYear})`)}</ItemList>
+                <ItemList getData={getAllPlanets} onItemSelected={ () => {}}>{(i) => (`${i.name} (${i.birthYear})`)}</ItemList>
 
             </div>
         );
