@@ -7,16 +7,26 @@ import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, S
 import ErrorBoundry from "../ErrorBoundry";
 import SwapiService from "../../services/swapi-service";
 import {SwapiServiceProvider} from "../swapi-service-context";
+import DummySwapiService from "../../services/dummy-swapi-service";
 
 import './app.css';
 
 export default class App extends Component {
 
-    swapiService = new SwapiService();
-
     state = {
         hasError: false,
-        showRandomPlanet: true
+        showRandomPlanet: true,
+        swapiService: new SwapiService(),
+    }
+
+    onServiceChange = () => {
+        this.setState( ({swapiService}) => {
+            const Service = swapiService instanceof SwapiService ?
+                DummySwapiService : SwapiService;
+            return {
+                swapiService: new Service(),
+            }
+        } )
     }
 
     componentDidCatch() {
@@ -40,13 +50,12 @@ export default class App extends Component {
         }
 
         const planet = this.state.showRandomPlanet ?
-            <RandomPlanet/> :
-            null;
+            <RandomPlanet/> : null;
 
         return (
             <ErrorBoundry>
-                <SwapiServiceProvider value={this.swapiService}>
-                    <Header/>
+                <SwapiServiceProvider value={this.state.swapiService}>
+                    <Header onServiceChange={this.onServiceChange}/>
                     {planet}
                     <div className="row mb2 button-row">
                         <button
