@@ -6,9 +6,9 @@ import ErrorIndicator from "../error-indicator";
 import {PersonDetails, PersonList, PlanetDetails, PlanetList, StarshipDetails, StarshipList} from "../sw-components";
 import ErrorBoundry from "../ErrorBoundry";
 import SwapiService from "../../services/swapi-service";
+import {SwapiServiceProvider} from "../swapi-service-context";
 
 import './app.css';
-import {SwapiServiceProvider} from "../swapi-service-context";
 
 export default class App extends Component {
 
