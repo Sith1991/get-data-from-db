@@ -64,7 +64,7 @@ export default class ItemDetails extends Component {
         }
 
         const PersonView = ({item}) => {
-            const {id, name, gender, birthYear, eyeColor} = item;
+            const {name} = item;
             return (
                 <React.Fragment>
                     <img className="person-image"
