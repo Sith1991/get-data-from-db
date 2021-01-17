@@ -55,15 +55,9 @@ export default class App extends Component {
                 <PlanetDetails itemId={5}/>
                 <StarshipDetails itemId={9}/>
 
-                <PersonList>
-                    { (i) => <span>{i.name}</span> }
-                </PersonList>
-                <PlanetList>
-                    { (i) => <span>{i.name}</span> }
-                </PlanetList>
-                <StarshipList>
-                    { (i) => <span>{i.name}</span> }
-                </StarshipList>
+                <PersonList />
+                <PlanetList />
+                <StarshipList />
             </div>
         );
     }
