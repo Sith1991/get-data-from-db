@@ -17,7 +17,8 @@ export default class StarshipsPage extends Component {
     render() {
         const {onItemSelected} = this.state;
         return (
-            <Row left={<StarshipList onItemSelected={this.onItemSelected}/>} right={<StarshipDetails itemId={onItemSelected}/>}/>
+            <Row left={<StarshipList onItemSelected={this.onItemSelected}/>}
+                 right={<StarshipDetails itemId={onItemSelected}/>}/>
         )
     }
 }
