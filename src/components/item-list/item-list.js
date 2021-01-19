@@ -4,6 +4,10 @@ import './item-list.css';
 
 const ItemList = (props) => {
 
+    ItemList.defaultProps = {
+        onItemSelected: () => {}
+    }
+
     const {data, onItemSelected, children: renderLabel} = props;
 
     const items = data.map((item) => {

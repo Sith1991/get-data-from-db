@@ -43,7 +43,7 @@ export default class App extends Component {
             <ErrorBoundry>
                 <SwapiServiceProvider value={this.state.swapiService}>
                     <Header onServiceChange={this.onServiceChange}/>
-                    <RandomPlanet/>
+                    <RandomPlanet />
 
                     <PeoplePage />
                     <PlanetsPage />
