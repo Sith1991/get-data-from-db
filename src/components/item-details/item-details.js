@@ -70,7 +70,8 @@ export default class ItemDetails extends Component {
             return (
                 <React.Fragment>
                     <img className="person-image"
-                         src={image}/>
+                         src={image}
+                    alt={'image'}/>
 
                     <div className="card-body">
                         <h4>{name}</h4>
